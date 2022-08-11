@@ -4,9 +4,7 @@ const User = require('../models/userModel')
 const requireAuth = async (req, res, next) => {
   // verify user is authenticated
   
-  res.header("Access-Control-Allow-Origin", "*");
- res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
- res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+ 
   const { authorization } = req.headers
 
   if (!authorization) {
