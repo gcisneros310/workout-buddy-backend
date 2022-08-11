@@ -3,6 +3,10 @@ const User = require('../models/userModel')
 
 const requireAuth = async (req, res, next) => {
   // verify user is authenticated
+  
+  res.header("Access-Control-Allow-Origin", "*");
+ res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+ res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
   const { authorization } = req.headers
 
   if (!authorization) {
@@ -12,6 +16,7 @@ const requireAuth = async (req, res, next) => {
   const token = authorization.split(' ')[1]
 
   try {
+    
     const { _id } = jwt.verify(token, process.env.SECRET_SIG)
 
     req.user = await User.findOne({ _id }).select('_id')
