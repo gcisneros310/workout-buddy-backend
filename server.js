@@ -16,11 +16,10 @@ app.use(express.json())
 
 app.use((req, res, next) => {
  console.log(req.path, req.method)
-if (Context.Request.HttpMethod.Equals("OPTIONS")) {
-        Response.AddHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-        Response.AddHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-        Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
-        Context.ApplicationInstance.CompleteRequest();
+res.header('Access-Control-Allow-Origin', '*');
+res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
+res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
     // console.log('app.use function running real quick')
     next()
 })
