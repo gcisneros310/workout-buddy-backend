@@ -14,13 +14,19 @@ const app = express()
 //middleware
 app.use(express.json())
 
-app.use((req, res, next) => {
-    console.log(req.path, req.method)
 
-    res.header("Access-Control-Allow-Origin", '*');
-  res.header("Access-Control-Allow-Credentials", true);
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
+var corsMiddleware = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*'); //replace localhost with actual host
+    res.header('Access-Control-Allow-Methods', 'OPTIONS, GET, PUT, PATCH, POST, DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, X-Requested-With, Authorization');
+
+    next();
+}
+
+app.use(corsMiddleware);
+
+app.use((req, res, next) => {
+ console.log(req.path, req.method)
     // console.log('app.use function running real quick')
     next()
 })

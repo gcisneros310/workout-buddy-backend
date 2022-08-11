@@ -3,6 +3,8 @@ const User = require('../models/userModel')
 
 const requireAuth = async (req, res, next) => {
   // verify user is authenticated
+  
+ 
   const { authorization } = req.headers
 
   if (!authorization) {
@@ -12,6 +14,7 @@ const requireAuth = async (req, res, next) => {
   const token = authorization.split(' ')[1]
 
   try {
+    
     const { _id } = jwt.verify(token, process.env.SECRET_SIG)
 
     req.user = await User.findOne({ _id }).select('_id')
