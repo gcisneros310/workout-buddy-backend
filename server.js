@@ -16,8 +16,8 @@ app.use(express.json())
 
 app.use((req, res, next) => {
  console.log(req.path, req.method)
-res.header('Access-Control-Allow-Origin', 'localhost'); //replace localhost with actual host
-    res.header('Access-Control-Allow-Methods', 'OPTIONS, GET, PUT, PATCH, POST, DELETE');
+  res.setHeader("Access-Control-Allow-Origin", "*");
+   res.header('Access-Control-Allow-Methods', 'OPTIONS, GET, PUT, PATCH, POST, DELETE');
     res.header('Access-Control-Allow-Headers', 'Content-Type, X-Requested-With, Authorization');
     // console.log('app.use function running real quick')
     next()
