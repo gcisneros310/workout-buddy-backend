@@ -16,10 +16,9 @@ app.use(express.json())
 
 app.use((req, res, next) => {
  console.log(req.path, req.method)
-responseBuilder.header("Access-Control-Allow-Origin", "*");
-responseBuilder.header("Access-Control-Allow-Credentials", "true");
-responseBuilder.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-responseBuilder.header("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Authorization");
+res.setHeader("Access-Control-Allow-Origin", 'https://netlify-thinks-gcisneros310-is-great.netlify.app/');
+  res.setHeader('Access-Control-Allow-Methods', 'POST,GET,OPTIONS,PUT,DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Accept');
     // console.log('app.use function running real quick')
     next()
 })
