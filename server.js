@@ -16,9 +16,9 @@ app.use(express.json())
 
 app.use((req, res, next) => {
  console.log(req.path, req.method)
-res.setHeader("Access-Control-Allow-Origin", 'https://netlify-thinks-gcisneros310-is-great.netlify.app/');
-  res.setHeader('Access-Control-Allow-Methods', 'POST,GET,OPTIONS,PUT,DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Accept');
+res.header('Access-Control-Allow-Origin', 'localhost'); //replace localhost with actual host
+    res.header('Access-Control-Allow-Methods', 'OPTIONS, GET, PUT, PATCH, POST, DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, X-Requested-With, Authorization');
     // console.log('app.use function running real quick')
     next()
 })
