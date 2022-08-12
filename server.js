@@ -1,5 +1,6 @@
 require('dotenv').config()
 
+const cors = require('cors')
 port = process.env.PORT || 4000
 const express = require('express')
 
@@ -14,19 +15,21 @@ const app = express()
 //middleware
 app.use(express.json())
 
-
-var corsMiddleware = function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*'); //replace localhost with actual host
-    res.header('Access-Control-Allow-Methods', 'OPTIONS, GET, PUT, PATCH, POST, DELETE');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, X-Requested-With, Authorization');
-
-    next();
-}
-
-app.use(corsMiddleware);
+const corsOptions ={
+    origin:'*', 
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200,
+ }
+ 
+ app.use(cors(corsOptions)) // Use this after the variable declaration
 
 app.use((req, res, next) => {
- console.log(req.path, req.method)
+    console.log(req.path, req.method)
+
+    res.header("Access-Control-Allow-Origin", '*');
+  res.header("Access-Control-Allow-Credentials", true);
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+  res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
     // console.log('app.use function running real quick')
     next()
 })
